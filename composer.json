@@ -1,0 +1,21 @@
+{
+    "name": "analogue/laravel-auth",
+    "description": "AnalogueORM Authentication Driver for Laravel",
+    "authors": [
+        {
+            "name": "Rémi Collin",
+            "email": "remi@plateau.io"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+        "analogue/orm": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Analogue\\LaravelAuth": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
