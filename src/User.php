@@ -57,4 +57,14 @@ class User extends Entity implements UserInterface, RemindableInterface {
 		return 'remember_token';
 	}
 
+	/**
+	 * Get the e-mail address where password reminders are sent.
+	 *
+	 * @return string
+	 */
+	public function getReminderEmail()
+	{
+		return $this->email;
+	}
+
 }
