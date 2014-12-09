@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Analogue\\LaravelAuth": "src/"
+            "Analogue\\LaravelAuth\\": "src/"
         }
     },
     "minimum-stability": "stable"
