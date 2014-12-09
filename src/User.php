@@ -2,7 +2,7 @@
 
 use Analogue\ORM\Entity;
 use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\RemindableInterface;
+use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Entity implements UserInterface, RemindableInterface {
 
