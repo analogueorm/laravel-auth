@@ -1,10 +1,12 @@
 <?php namespace Analogue\LaravelAuth;
 
 use Analogue\ORM\Entity;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Entity implements UserInterface, RemindableInterface {
+class User extends Entity implements AuthenticatableContract, CanResetPasswordContract {
 
 	/**
 	 * Get the unique identifier for the user.
@@ -58,13 +60,14 @@ class User extends Entity implements UserInterface, RemindableInterface {
 	}
 
 	/**
-	 * Get the e-mail address where password reminders are sent.
+	 * Get the e-mail address where password reset links are sent.
 	 *
 	 * @return string
 	 */
-	public function getReminderEmail()
+	public function getEmailForPasswordReset()
 	{
 		return $this->email;
 	}
+
 
 }
