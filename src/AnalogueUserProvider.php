@@ -1,21 +1,17 @@
 <?php namespace Analogue\LaravelAuth;
 
 use Analogue\ORM\System\Manager;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\UserProviderInterface;
-use Illuminate\Hashing\HasherInterface;
+use Illuminate\Contracts\Auth\UserProvider;
+use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
-class AnalogueUserProvider implements UserProviderInterface {
+
+class AnalogueUserProvider implements UserProvider {
 
 	/**
-	* @var \Illuminate\Hashing\HasherInterface
+	* @var \Illuminate\Contracts\Hashing\Hasher
 	*/
 	protected $hasher;
-
-	/**
-	* @var \Analogue\ORM\System\Manager
-	*/
-	protected $mapper;
 
 	/**
 	* @var string
@@ -23,14 +19,13 @@ class AnalogueUserProvider implements UserProviderInterface {
 	protected $entity;
 
 	/**
-	 * @param \Illuminate\Hashing\HasherInterface $hasher  
+	 * @param \Illuminate\Contracts\Hashing\HasherContract $hasher  
 	 * @param \Analogue\ORM\System\Manager         $manager 
 	 * @param string          $entity  
 	 */
-	public function __construct(HasherInterface $hasher, Manager $manager, $entity)
+	public function __construct(HasherContract $hasher, $entity)
 	{
 		$this->hasher = $hasher;
-		$this->mapper = $manager->mapper($entity);
 		$this->entity = $entity;
 	}
 
@@ -56,7 +51,7 @@ class AnalogueUserProvider implements UserProviderInterface {
     {
         $entity = $this->getEntity();
 
-        $keyName = $this->mapper->getEntityMap()->getKeyName();
+        $keyName = Manager::mapper($entity)->getEntityMap()->getKeyName();
 
         return $this->getRepository()->where($keyName,'=',$identifier)
         	->where($entity->getRememberTokenName(), '=', $token)->first();
@@ -69,7 +64,7 @@ class AnalogueUserProvider implements UserProviderInterface {
      * @param  string $token
      * @return void
      */
-    public function updateRememberToken(UserInterface $user, $token)
+    public function updateRememberToken(UserContract $user, $token)
     {
         $user->setRememberToken($token);
         
@@ -99,7 +94,7 @@ class AnalogueUserProvider implements UserProviderInterface {
      * @param  array $credentials
      * @return bool
      */
-    public function validateCredentials(UserInterface $user, array $credentials)
+    public function validateCredentials(UserContract $user, array $credentials)
     {
         return $this->hasher->check($credentials['password'], $user->getAuthPassword());
     }
@@ -111,7 +106,7 @@ class AnalogueUserProvider implements UserProviderInterface {
 	*/
 	private function getRepository()
 	{
-		return $this->mapper->repository($this->entity);
+		return Manager::repository($this->entity);
 	}
 
 	/**
@@ -121,6 +116,8 @@ class AnalogueUserProvider implements UserProviderInterface {
 	 */
 	private function getEntity()
 	{
-		return $this->mapper->newInstance();
+        $entity = $this->getEntity();
+
+		return Manager::mapper($entity)->newInstance();
 	}
 }

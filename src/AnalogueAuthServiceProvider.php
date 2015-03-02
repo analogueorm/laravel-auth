@@ -17,8 +17,7 @@ class AnalogueAuthServiceProvider extends ServiceProvider {
 		$this->app[AuthManager::class]->extend('analogue', function ($app) {
 			
 			return new AnalogueUserProvider(
-				$app['Illuminate\Hashing\HasherInterface'],
-				$app['analogue'],
+				$app['Illuminate\Contracts\Hashing\Hasher'],
 				$app['config']['auth.model']
 			);
 		});
