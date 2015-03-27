@@ -8,6 +8,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Entity implements AuthenticatableContract, CanResetPasswordContract {
 
+	protected $hidden = ['password', 'remember_token'];
+
 	/**
 	 * Get the unique identifier for the user.
 	 *
