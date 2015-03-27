@@ -1,6 +1,8 @@
 {
     "name": "analogue/laravel-auth",
     "description": "AnalogueORM Authentication Driver for Laravel 5",
+    "homepage": "http://github.com/analogueorm/laravel-auth",
+    "license": "MIT",
     "authors": [
         {
             "name": "Rémi Collin",
