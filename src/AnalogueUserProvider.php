@@ -13,6 +13,13 @@ class AnalogueUserProvider implements UserProvider {
 	*/
 	protected $hasher;
 
+    /**
+     * Analogue Manager instance
+     * 
+     * @var \Analogue\ORM\System\Manager
+     */
+    protected $manager;
+
 	/**
 	* @var string
 	*/
@@ -23,9 +30,10 @@ class AnalogueUserProvider implements UserProvider {
 	 * @param \Analogue\ORM\System\Manager         $manager 
 	 * @param string          $entity  
 	 */
-	public function __construct(HasherContract $hasher, $entity)
+	public function __construct(HasherContract $hasher, Manager $manager, $entity)
 	{
 		$this->hasher = $hasher;
+        $this->manager = $manager;
 		$this->entity = $entity;
 	}
 
@@ -51,7 +59,7 @@ class AnalogueUserProvider implements UserProvider {
     {
         $entity = $this->getEntity();
 
-        $keyName = Manager::mapper($entity)->getEntityMap()->getKeyName();
+        $keyName = $this->manager->mapper($entity)->getEntityMap()->getKeyName();
 
         return $this->getRepository()->where($keyName,'=',$identifier)
         	->where($entity->getRememberTokenName(), '=', $token)->first();
@@ -106,10 +114,10 @@ class AnalogueUserProvider implements UserProvider {
 	*/
 	private function getRepository()
 	{
-		return Manager::repository($this->entity);
+		return $this->manager->repository($this->entity);
 	}
 
-	/**
+    /**
 	 * Instantiate an user entity
 	 * 
 	 * @return \Analogue\ORM\Entity
@@ -118,6 +126,6 @@ class AnalogueUserProvider implements UserProvider {
 	{
         $entity = $this->getEntity();
 
-		return Manager::mapper($entity)->newInstance();
+		return $this->manager->mapper($entity)->newInstance();
 	}
 }

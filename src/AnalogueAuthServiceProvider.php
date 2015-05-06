@@ -18,6 +18,7 @@ class AnalogueAuthServiceProvider extends ServiceProvider {
 			
 			return new AnalogueUserProvider(
 				$app['Illuminate\Contracts\Hashing\Hasher'],
+				$app['analogue'],
 				$app['config']['auth.model']
 			);
 		});
