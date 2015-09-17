@@ -92,7 +92,7 @@ class AnalogueUserProvider implements UserProvider {
             if ( ! str_contains($key, 'password'))
                 $criteria[$key] = $value;
 
-        return $this->getRepository()->firstByAttributes($criteria);
+        return $this->getRepository()->firstMatching($criteria);
     }
 
     /**
