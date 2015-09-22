@@ -1,12 +1,15 @@
 <?php namespace Analogue\LaravelAuth;
 
 use Analogue\ORM\Entity;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Entity implements AuthenticatableContract, CanResetPasswordContract {
+class User extends Entity implements AuthenticatableContract,
+									 AuthorizableContract,
+									 CanResetPasswordContract {
 
 	protected $hidden = ['password', 'remember_token'];
 
@@ -71,5 +74,41 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
 		return $this->email;
 	}
 
+	/**
+     * Determine if the entity has a given ability.
+     *
+     * @param  string  $ability
+     * @param  array|mixed  $arguments
+     * @return bool
+     */
+    public function can($ability, $arguments = [])
+    {
+        return Container::getInstance()->make(Gate::class)
+        				->forUser($this)->check($ability, $arguments);
+    }
+
+    /**
+     * Determine if the entity does not have a given ability.
+     *
+     * @param  string  $ability
+     * @param  array|mixed  $arguments
+     * @return bool
+     */
+    public function cant($ability, $arguments = [])
+    {
+        return ! $this->can($ability, $arguments);
+    }
+
+    /**
+     * Determine if the entity does not have a given ability.
+     *
+     * @param  string  $ability
+     * @param  array|mixed  $arguments
+     * @return bool
+     */
+    public function cannot($ability, $arguments = [])
+    {
+        return $this->cant($ability, $arguments);
+    }
 
 }
