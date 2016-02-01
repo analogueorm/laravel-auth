@@ -23,6 +23,17 @@ class User extends Entity implements AuthenticatableContract,
 		return $this->id;
 	}
 
+    /**
+     * Get the identifier's property name for the user.
+     *
+     * @return string
+     */
+    public function getAuthIdentifierName()
+    {
+        return 'id';
+    }
+
+
 	/**
 	 * Get the password for the user.
 	 *
