@@ -11,8 +11,8 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "illuminate/support": "~5.1",
-        "analogue/orm": "~5.1"
+        "illuminate/support": "~5.2",
+        "analogue/orm": "~5.2"
     },
     "autoload": {
         "psr-4": {
