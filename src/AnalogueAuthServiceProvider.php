@@ -10,18 +10,11 @@ class AnalogueAuthServiceProvider extends ServiceProvider {
 	 *
 	 * @var bool
 	 */
-	protected $defer = false;
+	protected $defer = true;
 
 	public function boot()
 	{
-		$this->app[AuthManager::class]->extend('analogue', function ($app) {
-			
-			return new AnalogueUserProvider(
-				$app['Illuminate\Contracts\Hashing\Hasher'],
-				$app['analogue'],
-				$app['config']['auth.model']
-			);
-		});
+		//	
 	}
 
 	/**
@@ -31,7 +24,13 @@ class AnalogueAuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->app[AuthManager::class]->provider('analogue', function($app, $config) {
+			return new AnalogueUserProvider(
+				$app['Illuminate\Contracts\Hashing\Hasher'],
+				$app['analogue'],
+				$config['model']
+			);
+		});
 	}
 
 	/**
