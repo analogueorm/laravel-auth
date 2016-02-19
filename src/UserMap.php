@@ -2,8 +2,8 @@
 
 use Analogue\ORM\EntityMap;
 
-class UserMap extends EntityMap {
+class UserMap extends EntityMap
+{
 
     public $timestamps = true;
-
 }

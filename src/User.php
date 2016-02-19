@@ -8,20 +8,21 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Entity implements AuthenticatableContract,
-									 AuthorizableContract,
-									 CanResetPasswordContract {
+                                     AuthorizableContract,
+                                     CanResetPasswordContract
+{
 
-	protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token'];
 
-	/**
-	 * Get the unique identifier for the user.
-	 *
-	 * @return mixed
-	 */
-	public function getAuthIdentifier()
-	{
-		return $this->id;
-	}
+    /**
+     * Get the unique identifier for the user.
+     *
+     * @return mixed
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->id;
+    }
 
     /**
      * Get the identifier's property name for the user.
@@ -34,58 +35,58 @@ class User extends Entity implements AuthenticatableContract,
     }
 
 
-	/**
-	 * Get the password for the user.
-	 *
-	 * @return string
-	 */
-	public function getAuthPassword()
-	{
-		return $this->password;
-	}
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 
-	/**
-	 * Get the token value for the "remember me" session.
-	 *
-	 * @return string
-	 */
-	public function getRememberToken()
-	{
-		return $this->{$this->getRememberTokenName()};
-	}
+    /**
+     * Get the token value for the "remember me" session.
+     *
+     * @return string
+     */
+    public function getRememberToken()
+    {
+        return $this->{$this->getRememberTokenName()};
+    }
 
-	/**
-	 * Set the token value for the "remember me" session.
-	 *
-	 * @param  string  $value
-	 * @return void
-	 */
-	public function setRememberToken($value)
-	{
-		$this->{$this->getRememberTokenName()} = $value;
-	}
+    /**
+     * Set the token value for the "remember me" session.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setRememberToken($value)
+    {
+        $this->{$this->getRememberTokenName()} = $value;
+    }
 
-	/**
-	 * Get the column name for the "remember me" token.
-	 *
-	 * @return string
-	 */
-	public function getRememberTokenName()
-	{
-		return 'remember_token';
-	}
+    /**
+     * Get the column name for the "remember me" token.
+     *
+     * @return string
+     */
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
+    }
 
-	/**
-	 * Get the e-mail address where password reset links are sent.
-	 *
-	 * @return string
-	 */
-	public function getEmailForPasswordReset()
-	{
-		return $this->email;
-	}
+    /**
+     * Get the e-mail address where password reset links are sent.
+     *
+     * @return string
+     */
+    public function getEmailForPasswordReset()
+    {
+        return $this->email;
+    }
 
-	/**
+    /**
      * Determine if the entity has a given ability.
      *
      * @param  string  $ability
@@ -95,7 +96,7 @@ class User extends Entity implements AuthenticatableContract,
     public function can($ability, $arguments = [])
     {
         return Container::getInstance()->make(Gate::class)
-        				->forUser($this)->check($ability, $arguments);
+                        ->forUser($this)->check($ability, $arguments);
     }
 
     /**
@@ -121,5 +122,4 @@ class User extends Entity implements AuthenticatableContract,
     {
         return $this->cant($ability, $arguments);
     }
-
 }
