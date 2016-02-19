@@ -1,44 +1,36 @@
 #Analogue ORM - Laravel Authentication Driver
 
-This is an out-of-the-box authentication driver for Laravel 4/5. It replaces the Eloquent Model with an Analogue Entity, while using the default database structure found in the default laravel install.
+This is an out-of-the-box authentication driver for Laravel 5. It replaces the Eloquent Model with an Analogue Entity, while using the default database structure found in the default laravel install.
 
 ## Installation
 
-Add this line to your composer.json file : 
-
-Laravel 4.2 : 
-```
-"analogue/laravel-auth": "~4.0"
-```
-
 Laravel 5 : 
 ```
-"analogue/laravel-auth": "~5.0"
-```
-
-Then run : 
-
-```
-composer update
+composer require "analogue/laravel-auth": "~5.2"
 ```
 
 ## Configuration
 
-Add the Service Provider to config/app.php :
+Add this line to the Service Providers in `config/app.php` :
 
 ```
-'Analogue\LaravelAuth\AnalogueAuthServiceProvider',
+Analogue\LaravelAuth\AnalogueAuthServiceProvider::class,
 ```
 
-Change the Authentication driver and User Model :
+Then, in `auth.php`
+
+Change the `users` provider driver and model :
 
 config/auth.php
 ```
-'driver' => 'analogue',
+
+'providers' => [
+    'users' => [
+            'driver' => 'analogue',
+            'model' => Analogue\LaravelAuth\User::class,
+        ],
 
 ...
 
-'model' => 'Analogue\LaravelAuth\User',
-```
 
 
