@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Auth\AuthManager;
+use Illuminate\Contracts\Hashing\Hasher;
 
 class AnalogueAuthServiceProvider extends ServiceProvider {
 
@@ -15,6 +16,14 @@ class AnalogueAuthServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		//	
+		//dd($this->app['auth']);
+		$this->app['auth']->provider('analogue', function($app, $config) {
+			return new AnalogueUserProvider(
+				$app[Hasher::class],
+				$app['analogue'],
+				$config['model']
+			);
+		});
 	}
 
 	/**
@@ -24,13 +33,7 @@ class AnalogueAuthServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app[AuthManager::class]->provider('analogue', function($app, $config) {
-			return new AnalogueUserProvider(
-				$app['Illuminate\Contracts\Hashing\Hasher'],
-				$app['analogue'],
-				$config['model']
-			);
-		});
+		//
 	}
 
 	/**
