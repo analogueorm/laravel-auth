@@ -3,7 +3,7 @@
 [![Latest Version](https://img.shields.io/github/release/analogueorm/laravel-auth.svg?style=flat-square)](https://github.com/analogueorm/laravel-auth/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-This is an out-of-the-box authentication driver for Laravel 5. It replaces the Eloquent Model with an Analogue Entity, while using the default database structure found in the default laravel install.
+This is an out-of-the-box [Analogue](https://github.com/analogueorm/analogue) authentication driver for Laravel 5. It replaces the Eloquent Model with an Analogue Entity, while using the default database structure found in the default laravel install.
 
 ## Installation
 
