@@ -1,49 +1,30 @@
 <?php namespace Analogue\LaravelAuth;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Auth\AuthManager;
+use Auth;
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Support\ServiceProvider;
 
 class AnalogueAuthServiceProvider extends ServiceProvider
 {
 
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
+     * Tell the AuthManager that we provide an 'analogue' provider.
      */
-    protected $defer = true;
-
     public function boot()
     {
-        //	
-        //dd($this->app['auth']);
-        $this->app['auth']->provider('analogue', function ($app, $config) {
-            return new AnalogueUserProvider(
-                $app[Hasher::class],
-                $app['analogue'],
-                $config['model']
-            );
+        Auth::provider('analogue', function ($app, $config) {
+            return new AnalogueUserProvider($app[Hasher::class], $app['analogue'], $config['model']);
         });
     }
 
+
     /**
-     * Register the service provider.
+     * Register bindings in the container.
      *
      * @return void
      */
     public function register()
     {
         //
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return array();
     }
 }
