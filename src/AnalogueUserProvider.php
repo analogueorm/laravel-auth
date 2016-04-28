@@ -61,8 +61,11 @@ class AnalogueUserProvider implements UserProvider
 
         $keyName = $this->manager->mapper($entity)->getEntityMap()->getKeyName();
 
-        return $this->getRepository()->where($keyName, '=', $identifier)
-            ->where($entity->getRememberTokenName(), '=', $token)->first();
+        $criteria = [
+          $keyName => $identifier,
+          $entity->getRememberTokenName() => $token,
+        ];
+        return $this->getRepository()->firstMatching($criteria);
     }
 
     /**
@@ -121,13 +124,11 @@ class AnalogueUserProvider implements UserProvider
 
     /**
      * Instantiate an user entity
-     * 
+     *
      * @return \Analogue\ORM\Entity
      */
     private function getEntity()
     {
-        $entity = $this->getEntity();
-
-        return $this->manager->mapper($entity)->newInstance();
+        return $this->manager->mapper($this->entity)->newInstance();
     }
 }
