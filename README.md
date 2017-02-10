@@ -1,5 +1,5 @@
 #Analogue ORM - Laravel Authentication Driver
-[![Build Status](https://travis-ci.org/analogueorm/laravel-auth.svg?branch=5.2)](https://travis-ci.org/analogueorm/laravel-auth.svg?branch=5.2)
+[![Build Status](https://travis-ci.org/analogueorm/laravel-auth.svg?branch=5.4)](https://travis-ci.org/analogueorm/laravel-auth.svg?branch=5.4)
 [![Latest Version](https://img.shields.io/github/release/analogueorm/laravel-auth.svg?style=flat-square)](https://github.com/analogueorm/laravel-auth/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
@@ -7,11 +7,9 @@ This is an out-of-the-box [Analogue](https://github.com/analogueorm/analogue) au
 
 ## Installation
 
-Laravel 5.2 : 
-
 ```
 
-    composer require "analogue/laravel-auth": "~5.2"
+    composer require "analogue/laravel-auth"
 
 ```
 
