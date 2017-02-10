@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\BrowserKitTesting\Concerns\InteractsWithDatabase;
+use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+class TestCase extends BaseTestCase
 {
     use InteractsWithDatabase;
 
