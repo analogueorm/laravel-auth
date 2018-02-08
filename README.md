@@ -1,5 +1,5 @@
 # Analogue ORM - Laravel Authentication Driver
-[![Build Status](https://travis-ci.org/analogueorm/laravel-auth.svg?branch=5.4)](https://travis-ci.org/analogueorm/laravel-auth.svg?branch=5.4)
+[![Build Status](https://travis-ci.org/analogueorm/laravel-auth.svg?branch=5.6)](https://travis-ci.org/analogueorm/laravel-auth.svg?branch=5.6)
 [![Latest Version](https://img.shields.io/github/release/analogueorm/laravel-auth.svg?style=flat-square)](https://github.com/analogueorm/laravel-auth/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
